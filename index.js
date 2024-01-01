@@ -4,7 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const users = require("./routes/users");
-const categories = require('./routes/categories')
+const categories = require("./routes/categories");
 
 mongoose
   .connect(process.env.MONGO_DB)
@@ -14,7 +14,7 @@ mongoose
 app.use(express.json());
 
 app.use("/api/users", users);
-app.use('/api/categories', categories)
+app.use("/api/categories", categories);
 
 // PORT
 const port = process.env.PORT || 3000;
