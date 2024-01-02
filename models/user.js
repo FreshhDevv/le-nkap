@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     minLength: 5,
     maxLength: 50,
+    unique: true
   },
   join_date: {
     type: Date,
