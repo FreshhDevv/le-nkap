@@ -26,34 +26,35 @@ const transactionSchema = new mongoose.Schema({
       name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
       },
     }),
   },
   user: {
     type: new mongoose.Schema({
-        user_name: {
-            type: String,
-            required: true,
-            minLength: 5,
-            maxLength: 50,
-            trim: true
-        }
-    })
-  }
+      user_name: {
+        type: String,
+        required: true,
+        minLength: 5,
+        maxLength: 50,
+        trim: true,
+      },
+    }),
+  },
 });
 
-const Transaction = mongoose.model('Transaction', transactionSchema)
+const Transaction = mongoose.model("Transaction", transactionSchema);
 
 function validateTransaction(transaction) {
-    const schema = Joi.object({
-        name: Joi.string().min(5).max(50).required(),
-        type: Joi.string().min(5).max(50).required(),
-        amount: Joi.number().required(),
-        categoryId: Joi.string().required(),
-        userId: Joi.string().required()
-    })
+  const schema = Joi.object({
+    name: Joi.string().min(5).max(50).required(),
+    type: Joi.string().min(5).max(50).required(),
+    amount: Joi.number().required(),
+    categoryId: Joi.string().required(),
+    userId: Joi.string().required(),
+  });
+  return schema.validate(user);
 }
 
-exports.Transaction = Transaction
-exports.validate = validateTransaction
+exports.Transaction = Transaction;
+exports.validate = validateTransaction;
