@@ -50,4 +50,11 @@ if(!transaction) return res.status(404).send('The transaction with the given ID 
 res.send(transaction)
 })
 
+router.delete('/:id', async (req, res) => {
+    const transaction = await Transaction.findByIdAndDelete(req.params.id)
+    if(!transaction) return res.status(404).send('The transaction with the given ID was not found.')
+
+    res.send(transaction)
+})
+
 module.exports = router
