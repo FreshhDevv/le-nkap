@@ -30,17 +30,6 @@ const transactionSchema = new mongoose.Schema({
       },
     }),
   },
-  user: {
-    type: new mongoose.Schema({
-      user_name: {
-        type: String,
-        required: true,
-        minLength: 5,
-        maxLength: 50,
-        trim: true,
-      },
-    }),
-  },
 });
 
 const Transaction = mongoose.model("Transaction", transactionSchema);
@@ -51,9 +40,8 @@ function validateTransaction(transaction) {
     type: Joi.string().min(5).max(50).required(),
     amount: Joi.number().required(),
     categoryId: Joi.objectId().required(),
-    userId: Joi.string().required(),
   });
-  return schema.validate(user);
+  return schema.validate(transaction);
 }
 
 exports.Transaction = Transaction;
