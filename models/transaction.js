@@ -50,7 +50,7 @@ function validateTransaction(transaction) {
     name: Joi.string().min(5).max(50).required(),
     type: Joi.string().min(5).max(50).required(),
     amount: Joi.number().required(),
-    categoryId: Joi.string().required(),
+    categoryId: Joi.objectId().required(),
     userId: Joi.string().required(),
   });
   return schema.validate(user);
