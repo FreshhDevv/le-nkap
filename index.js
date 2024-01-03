@@ -7,6 +7,7 @@ const express = require("express");
 const app = express();
 const users = require("./routes/users");
 const categories = require("./routes/categories");
+const transactions = require('./routes/transactions')
 
 mongoose
   .connect(process.env.MONGO_DB)
@@ -17,6 +18,7 @@ app.use(express.json());
 
 app.use("/api/users", users);
 app.use("/api/categories", categories);
+app.use('/api/transactions', transactions)
 
 // PORT
 const port = process.env.PORT || 3000;
