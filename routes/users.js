@@ -12,11 +12,11 @@ router.post("/", async (req, res) => {
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
-  let user = new User({
+  const user = new User({
     user_name: req.body.user_name,
     join_date: req.body.join_date,
   });
-  user = await user.save();
+  await user.save();
   res.send(user);
 });
 

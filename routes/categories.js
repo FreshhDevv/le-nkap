@@ -12,12 +12,12 @@ router.post("/", async (req, res) => {
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
-  let category = new Category({
+  const category = new Category({
     name: req.body.name,
     image: req.body.image,
     type: req.body.type,
   });
-  category = await category.save();
+  await category.save();
   res.send(category);
 });
 
