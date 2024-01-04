@@ -1,6 +1,8 @@
+const _ = require("lodash");
 const { User, validate } = require("../models/user");
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 router.get("/", async (req, res) => {
   const users = await User.find().sort("name");
@@ -12,12 +14,18 @@ router.post("/", async (req, res) => {
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
-  const user = new User({
-    user_name: req.body.user_name,
-    join_date: req.body.join_date,
-  });
+
+  let user = await User.findOne({ email: req.body.email });
+  if (user) return res.status(400).send("User already registered.");
+  user = new User(_.pick(req.body, ["name", "email", "password"]));
+
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password, salt);
   await user.save();
-  res.send(user);
+  const token = user.generateAuthToken()
+  res
+    .header("x-auth-token", token)
+    .send(_.pick(user, ["_id", "name", "email"]));
 });
 
 router.get("/:id", async (req, res) => {
@@ -32,7 +40,7 @@ router.put("/:id", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
   const user = await User.findByIdAndUpdate(
     req.params.id,
-    { user_name: req.body.user_name, join_date: req.body.join_date },
+    { name: req.body.name, join_date: req.body.join_date },
     { new: true }
   );
   if (!user)
