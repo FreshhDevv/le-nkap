@@ -5,12 +5,25 @@ const config = require('config')
 
 // Define the user schema
 const userSchema = new mongoose.Schema({
-  user_name: {
+  name: {
     type: String,
     required: true,
     minLength: 5,
     maxLength: 50,
     unique: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    minLength: 5,
+    maxLength: 255,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    minLength: 8,
+    maxLength: 1024
   },
   join_date: {
     type: Date,
@@ -29,7 +42,9 @@ const User = mongoose.model("User", userSchema);
 // Validation rules using Joi
 function validateUser(user) {
   const schema = Joi.object({
-    user_name: Joi.string().min(5).max(50).required(),
+    name: Joi.string().min(5).max(50).required(),
+    email: Joi.string().min(5).max(255).required().email(),
+    password: Joi.string().min(8).max(255).required(),
     join_date: Joi.date(),
   });
   return schema.validate(user);
