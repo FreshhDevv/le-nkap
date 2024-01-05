@@ -17,6 +17,10 @@ const categorySchema = new mongoose.Schema({
     required: true,
     enum: ["expense", "income"],
   },
+  userId: { // New field to associate the transaction with a user
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
 });
 
 const Category = mongoose.model("Category", categorySchema);
