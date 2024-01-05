@@ -234,9 +234,7 @@ components:
           type: string
         password:
           type: string
-     
-
- required:
+      required:
         - email
         - password
     CategoryList:
