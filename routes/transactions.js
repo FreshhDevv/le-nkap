@@ -1,75 +1,16 @@
+const { getAllTransactions, addTransaction, getTransaction, updateTransaction, deleteTransaction } = require('../controllers/transactionController');
 const auth = require('../middleware/auth')
-const { Category } = require("../models/category");
-const { Transaction, validate } = require("../models/transaction");
 const express = require("express");
 const router = express.Router();
 
-router.get("/", auth, async (req, res) => {
-  const transactions = await Transaction.find();
-  res.send(transactions);
-});
+router.get("/", auth, getAllTransactions);
 
-router.post("/", auth, async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.post("/", auth, addTransaction);
 
-  const category = await Category.findById(req.body.categoryId);
-  if (!category) return res.status(404).send("Invalid category");
+router.get("/:id", auth, getTransaction);
 
-  const transaction = new Transaction({
-    name: req.body.name,
-    type: req.body.type,
-    amount: req.body.amount,
-    category: {
-      _id: category._id,
-      name: category.name,
-    },
-  });
-  await transaction.save();
-  res.send(transaction);
-});
+router.put("/:id", auth, updateTransaction);
 
-router.get("/:id", auth, async (req, res) => {
-  const transaction = await Transaction.findById(req.params.id);
-  if (!transaction)
-    return res
-      .status(404)
-      .send("The transaction with the given ID was not found.");
-  res.send(transaction);
-});
-
-router.put("/:id", auth, async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
-  const category = await Category.findById(req.body.categoryId);
-  if (!category) return res.status(404).send("Invalid category");
-
-  const transaction = await Transaction.findByIdAndUpdate(
-    req.params.id,
-    {
-      name: req.body.name,
-      type: req.body.type,
-      amount: req.body.amount,
-      category: { _id: category._id, name: category.name },
-    },
-    { new: true }
-  );
-  if (!transaction)
-    return res
-      .status(404)
-      .send("The transaction with the given ID was not found.");
-  res.send(transaction);
-});
-
-router.delete("/:id", auth, async (req, res) => {
-  const transaction = await Transaction.findByIdAndDelete(req.params.id);
-  if (!transaction)
-    return res
-      .status(404)
-      .send("The transaction with the given ID was not found.");
-
-  res.send(transaction);
-});
+router.delete("/:id", auth, deleteTransaction);
 
 module.exports = router;
