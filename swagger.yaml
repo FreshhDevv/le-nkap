@@ -52,7 +52,7 @@ paths:
       security:
         - bearerAuth: []
       parameters:
-        - name: auth
+        - name: x-auth-token
           in: header
           description: An authorization header
           required: true
@@ -78,7 +78,7 @@ paths:
       security:
         - bearerAuth: []
       parameters:
-        - name: auth
+        - name: x-auth-token
           in: header
           description: An authorization header
           required: true
@@ -97,7 +97,7 @@ paths:
       security:
         - bearerAuth: []
       parameters:
-        - name: auth
+        - name: x-auth-token
           in: header
           description: An authorization header
           required: true
@@ -128,6 +128,12 @@ paths:
             required: true
             schema:
               type: string
+          - name: x-auth-token
+          in: header
+          description: An authorization header
+          required: true
+          schema:
+            type: string
         responses:
           '200':
             description: Successful operation
@@ -146,6 +152,12 @@ paths:
             required: true
             schema:
               type: string
+          - name: x-auth-token
+          in: header
+          description: An authorization header
+          required: true
+          schema:
+            type: string
         requestBody:
           required: true
           content:
@@ -170,6 +182,12 @@ paths:
             required: true
             schema:
               type: string
+          - name: x-auth-token
+          in: header
+          description: An authorization header
+          required: true
+          schema:
+            type: string
         responses:
           '200':
             description: Transaction deleted successfully
