@@ -164,13 +164,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdateTransactionRequest'
-          responses:
-            '200':
-              description: Transaction updated successfully
-              content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/Transaction'
+        responses:
+          '200':
+            description: Transaction updated successfully
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Transaction'
       delete:
         summary: Delete Transaction
         operationId: deleteTransaction
