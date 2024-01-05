@@ -35,11 +35,11 @@ router.get("/me", auth, async (req, res) => {
   res.send(user);
 });
 
-// router.put("/:id", async (req, res) => {
+// router.put("/me", auth, async (req, res) => {
 //   const { error } = validate(req.body);
 //   if (error) return res.status(400).send(error.details[0].message);
 //   const user = await User.findByIdAndUpdate(
-//     req.params.id,
+//     req.user._id,
 //     { name: req.body.name, join_date: req.body.join_date },
 //     { new: true }
 //   );
