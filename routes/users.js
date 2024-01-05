@@ -1,7 +1,7 @@
-const auth = require('../middleware/auth')
+const auth = require("../middleware/auth");
 const express = require("express");
 const router = express.Router();
-const { registerUser, loggedInUser } = require('../controllers/userController');
+const { registerUser, loggedInUser } = require("../controllers/userController");
 
 // router.get("/", async (req, res) => {
 //   const users = await User.find().sort("name");

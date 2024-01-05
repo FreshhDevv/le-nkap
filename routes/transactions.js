@@ -1,5 +1,11 @@
-const { getAllTransactions, addTransaction, getTransaction, updateTransaction, deleteTransaction } = require('../controllers/transactionController');
-const auth = require('../middleware/auth')
+const {
+  getAllTransactions,
+  addTransaction,
+  getTransaction,
+  updateTransaction,
+  deleteTransaction,
+} = require("../controllers/transactionController");
+const auth = require("../middleware/auth");
 const express = require("express");
 const router = express.Router();
 
