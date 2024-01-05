@@ -2,7 +2,8 @@ const { Category } = require("../models/category");
 const { Transaction, validate } = require("../models/transaction");
 
 const getAllTransactions = async (req, res) => {
-    const transactions = await Transaction.find( req.user._id);
+    const userId = req.user._id
+    const transactions = await Transaction.find({userId: userId});
     res.send(transactions);
   }
 
@@ -13,6 +14,7 @@ const getAllTransactions = async (req, res) => {
     const category = await Category.findById(req.body.categoryId);
     if (!category) return res.status(404).send("Invalid category");
   
+    const userId = req.user._id
     const transaction = new Transaction({
       name: req.body.name,
       type: req.body.type,
@@ -21,13 +23,14 @@ const getAllTransactions = async (req, res) => {
         _id: category._id,
         name: category.name,
       },
+      userId
     });
     await transaction.save();
     res.send(transaction);
   }
 
  const getTransaction = async (req, res) => {
-    const transaction = await Transaction.findById(req.params.id);
+    const transaction = await Transaction.findById(req.params.id, req.user._id);
     if (!transaction)
       return res
         .status(404)
