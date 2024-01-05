@@ -116,7 +116,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Transaction'
-    /{id}:
+    '/{id}':
       get:
         summary: Get Transaction by ID
         operationId: getTransactionById
@@ -129,11 +129,11 @@ paths:
             schema:
               type: string
           - name: x-auth-token
-          in: header
-          description: An authorization header
-          required: true
-          schema:
-            type: string
+            in: header
+            description: An authorization header
+            required: true
+            schema:
+              type: string
         responses:
           '200':
             description: Successful operation
@@ -153,11 +153,11 @@ paths:
             schema:
               type: string
           - name: x-auth-token
-          in: header
-          description: An authorization header
-          required: true
-          schema:
-            type: string
+            in: header
+            description: An authorization header
+            required: true
+            schema:
+              type: string
         requestBody:
           required: true
           content:
@@ -183,11 +183,11 @@ paths:
             schema:
               type: string
           - name: x-auth-token
-          in: header
-          description: An authorization header
-          required: true
-          schema:
-            type: string
+            in: header
+            description: An authorization header
+            required: true
+            schema:
+              type: string
         responses:
           '200':
             description: Transaction deleted successfully
@@ -234,7 +234,9 @@ components:
           type: string
         password:
           type: string
-      required:
+     
+
+ required:
         - email
         - password
     CategoryList:
