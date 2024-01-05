@@ -30,6 +30,10 @@ const transactionSchema = new mongoose.Schema({
       },
     }),
   },
+  userId: { // New field to associate the transaction with a user
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
 });
 
 const Transaction = mongoose.model("Transaction", transactionSchema);
