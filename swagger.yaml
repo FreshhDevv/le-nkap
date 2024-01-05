@@ -116,7 +116,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Transaction'
-    '/{id}':
+    '/{id}':  # Corrected indentation
       get:
         summary: Get Transaction by ID
         operationId: getTransactionById
