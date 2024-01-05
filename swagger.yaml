@@ -33,7 +33,7 @@ paths:
       security:
         - bearerAuth: []
       parameters:
-        - name: auth
+        - name: x-auth-token
           in: header
           description: An authorization header
           required: true
