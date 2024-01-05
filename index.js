@@ -27,11 +27,11 @@ mongoose
 
 app.use(express.json());
 
-app.use("/api/users", users);
-app.use("/api/categories", categories);
-app.use('/api/transactions', transactions)
-app.use('/api/auth', auth)
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/users", users);
+app.use("/categories", categories);
+app.use('/transactions', transactions)
+app.use('/auth', auth)
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // PORT
 const port = process.env.PORT || 3000;
