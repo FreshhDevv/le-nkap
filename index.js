@@ -10,6 +10,11 @@ const transactions = require('./routes/transactions')
 const auth = require('./routes/auth')
 const config = require('config')
 
+const swaggerUi = require('swagger-ui-express')
+const YAML = require('yamljs')
+
+const swaggerDocument = YAML.load('./swagger.yaml')
+
 if(!config.get('jwtPrivateKey')) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined.');
   process.exit(1)
@@ -26,6 +31,7 @@ app.use("/api/users", users);
 app.use("/api/categories", categories);
 app.use('/api/transactions', transactions)
 app.use('/api/auth', auth)
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // PORT
 const port = process.env.PORT || 3000;
