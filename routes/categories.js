@@ -15,7 +15,7 @@ router.post("/", auth, async (req, res) => {
   }
   const category = new Category({
     name: req.body.name,
-    image: req.body.image,
+    // image: req.body.image,
     type: req.body.type,
   });
   await category.save();
