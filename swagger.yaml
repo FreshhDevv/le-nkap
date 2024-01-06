@@ -269,6 +269,9 @@ components:
           type: string
         type:
           type: string
+          enum: 
+            - expense
+            - income
         amount:
           type: number
         category: 
@@ -289,6 +292,9 @@ components:
           type: string
         type:
           type: string
+          enum: 
+            - expense
+            - income
         amount:
           type: number
         categoryId:
@@ -305,6 +311,9 @@ components:
           type: string
         type:
           type: string
+          enum: 
+            - expense
+            - income
         amount:
           type: number
         categoryId:
