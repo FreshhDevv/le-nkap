@@ -322,7 +322,7 @@ components:
         email:
           type: string
         phone: 
-          type: phone
+          type: string
         password:
           type: string
         passwordConfirmation: 
@@ -341,4 +341,4 @@ components:
         email:
           type: string
         phone: 
-          type: phone
+          type: string
