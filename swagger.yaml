@@ -321,12 +321,18 @@ components:
           type: string
         email:
           type: string
+        phone: 
+          type: phone
         password:
+          type: string
+        passwordConfirmation: 
           type: string
       required:
         - name
         - email
+        - phone
         - password
+        - passwordConfirmation
     User:
       type: object
       properties:
@@ -334,3 +340,5 @@ components:
           type: string
         email:
           type: string
+        phone: 
+          type: phone

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 const jwt = require('jsonwebtoken')
 const config = require('config')
+const myCustomJoi = Joi.extend(require('joi-phone-number'));
 
 // Define the user schema
 const userSchema = new mongoose.Schema({
@@ -18,6 +19,12 @@ const userSchema = new mongoose.Schema({
     minLength: 5,
     maxLength: 255,
     unique: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+    minLength: 9,
+    unique: true
   },
   password: {
     type: String,
@@ -44,7 +51,9 @@ function validateUser(user) {
   const schema = Joi.object({
     name: Joi.string().min(5).max(50).required(),
     email: Joi.string().min(5).max(255).required().email(),
+    phone: myCustomJoi.string().phoneNumber(), // validation error
     password: Joi.string().min(8).max(255).required(),
+    passwordConfirmation: Joi.string().min(8).max(255).required(),
     join_date: Joi.date(),
   });
   return schema.validate(user);
