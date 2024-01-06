@@ -18,9 +18,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LoginRequest'
+              $ref: "#/components/schemas/LoginRequest"
       responses:
-        '200':
+        "200":
           description: Successful login
           content:
             application/json:
@@ -40,12 +40,12 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CategoryList'
+                $ref: "#/components/schemas/CategoryList"
     post:
       summary: Add Category
       operationId: addCategory
@@ -63,14 +63,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddCategoryRequest'
+              $ref: "#/components/schemas/AddCategoryRequest"
       responses:
-        '200':
+        "200":
           description: Category added successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Category'
+                $ref: "#/components/schemas/Category"
   /transactions:
     get:
       summary: Get User Transactions
@@ -85,12 +85,12 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransactionList'
+                $ref: "#/components/schemas/TransactionList"
     post:
       summary: Add Transaction
       operationId: addTransaction
@@ -108,15 +108,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddTransactionRequest'
+              $ref: "#/components/schemas/AddTransactionRequest"
       responses:
-        '200':
+        "200":
           description: Transaction added successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
-    '/{id}':  # Corrected indentation
+                $ref: "#/components/schemas/Transaction"
+    "/{id}": # Corrected indentation
       get:
         summary: Get Transaction by ID
         operationId: getTransactionById
@@ -135,12 +135,12 @@ paths:
             schema:
               type: string
         responses:
-          '200':
+          "200":
             description: Successful operation
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/Transaction'
+                  $ref: "#/components/schemas/Transaction"
       put:
         summary: Update Transaction
         operationId: updateTransaction
@@ -163,14 +163,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateTransactionRequest'
+                $ref: "#/components/schemas/UpdateTransactionRequest"
         responses:
-          '200':
+          "200":
             description: Transaction updated successfully
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/Transaction'
+                  $ref: "#/components/schemas/Transaction"
       delete:
         summary: Delete Transaction
         operationId: deleteTransaction
@@ -189,12 +189,12 @@ paths:
             schema:
               type: string
         responses:
-          '200':
+          "200":
             description: Transaction deleted successfully
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/Transaction'
+                  $ref: "#/components/schemas/Transaction"
   /users:
     post:
       summary: Register User
@@ -204,26 +204,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegisterUserRequest'
+              $ref: "#/components/schemas/RegisterUserRequest"
       responses:
-        '200':
+        "200":
           description: User registered successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
     get:
       summary: Get Logged In User
       operationId: getLoggedInUser
       security:
         - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
 
 components:
   schemas:
@@ -240,7 +240,7 @@ components:
     CategoryList:
       type: array
       items:
-        $ref: '#/components/schemas/Category'
+        $ref: "#/components/schemas/Category"
     Category:
       type: object
       properties:
@@ -261,7 +261,7 @@ components:
     TransactionList:
       type: array
       items:
-        $ref: '#/components/schemas/Transaction'
+        $ref: "#/components/schemas/Transaction"
     Transaction:
       type: object
       properties:
