@@ -271,6 +271,17 @@ components:
           type: string
         amount:
           type: number
+        category: 
+          type: object
+          properties:
+            _id: 
+              type: string
+            name: 
+              type: string
+        userId: 
+          type: string
+        date: 
+          type: string
     AddTransactionRequest:
       type: object
       properties:
