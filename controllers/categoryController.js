@@ -1,13 +1,13 @@
 const { Category, validate } = require("../models/category");
 
-const getCategories = async (req, res) => {
+const getCategories = async (req, res, next) => {
   const userId = req.user._id;
   try{
     const categories = await Category.find({ userId: userId }).sort("name");
     res.send(categories);
   }
   catch(ex) {
-    res.status(500).send('Something failed.')
+    next(ex)
   }
 };
 

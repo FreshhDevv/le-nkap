@@ -1,3 +1,4 @@
+const error = require('./middleware/error')
 const Joi = require('joi')
 Joi.objectId = require('joi-objectid')(Joi)
 require("dotenv").config();
@@ -32,6 +33,9 @@ app.use("/categories", categories);
 app.use('/transactions', transactions)
 app.use('/auth', auth)
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+//Error middleware
+app.use(error)
 
 // PORT
 const port = process.env.PORT || 3000;
