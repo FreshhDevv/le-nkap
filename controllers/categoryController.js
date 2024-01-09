@@ -16,6 +16,16 @@ const addCategory = asyncMiddleware(async (req, res) => {
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
+
+  const validTypes = ["expense", "income"];
+  if (!validTypes.includes(req.body.type)) {
+    return res
+      .status(400)
+      .send(
+        "Invalid category type. It should be either 'expense' or 'income'."
+      );
+  }
+
   const userId = req.user._id;
   const category = new Category({
     name: req.body.name,

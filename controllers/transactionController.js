@@ -15,6 +15,15 @@ const addTransaction = asyncMiddleware(async (req, res) => {
   const category = await Category.findById(req.body.categoryId);
   if (!category) return res.status(404).send("Invalid category");
 
+  const validTypes = ["expense", "income"];
+  if (!validTypes.includes(req.body.type)) {
+    return res
+      .status(400)
+      .send(
+        "Invalid transaction type. It should be either 'expense' or 'income'."
+      );
+  }
+
   const userId = req.user._id;
   const transaction = new Transaction({
     name: req.body.name,
@@ -48,6 +57,15 @@ const updateTransaction = asyncMiddleware(async (req, res) => {
 
   const category = await Category.findById(req.body.categoryId);
   if (!category) return res.status(404).send("Invalid category");
+
+  const validTypes = ["expense", "income"];
+  if (!validTypes.includes(req.body.type)) {
+    return res
+      .status(400)
+      .send(
+        "Invalid transaction type. It should be either 'expense' or 'income'."
+      );
+  }
 
   const transaction = await Transaction.findOneAndUpdate(
     { _id: req.params.id, userId: req.user._id },
