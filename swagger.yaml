@@ -258,6 +258,11 @@ components:
           enum:
             - expense
             - income
+          description: |
+            The type of the category.
+            Should be one of the following:
+            - expense
+            - income
       required:
         - name
         - type
