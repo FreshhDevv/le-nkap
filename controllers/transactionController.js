@@ -1,14 +1,13 @@
-const asyncMiddleware = require("../middleware/async");
 const { Category } = require("../models/category");
 const { Transaction, validate } = require("../models/transaction");
 
-const getAllTransactions = asyncMiddleware(async (req, res) => {
+const getAllTransactions = async (req, res) => {
   const userId = req.user._id;
   const transactions = await Transaction.find({ userId: userId });
   res.send(transactions);
-});
+}
 
-const addTransaction = asyncMiddleware(async (req, res) => {
+const addTransaction = async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -37,9 +36,9 @@ const addTransaction = asyncMiddleware(async (req, res) => {
   });
   await transaction.save();
   res.send(transaction);
-});
+}
 
-const getTransaction = asyncMiddleware(async (req, res) => {
+const getTransaction = async (req, res) => {
   const transaction = await Transaction.findOne({
     _id: req.params.id,
     userId: req.user._id,
@@ -49,9 +48,9 @@ const getTransaction = asyncMiddleware(async (req, res) => {
       .status(404)
       .send("The transaction with the given ID was not found.");
   res.send(transaction);
-});
+}
 
-const updateTransaction = asyncMiddleware(async (req, res) => {
+const updateTransaction = async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -82,9 +81,9 @@ const updateTransaction = asyncMiddleware(async (req, res) => {
       .status(404)
       .send("The transaction with the given ID was not found.");
   res.send(transaction);
-});
+}
 
-const deleteTransaction = asyncMiddleware(async (req, res) => {
+const deleteTransaction = async (req, res) => {
   const transaction = await Transaction.findOneAndDelete({
     _id: req.params.id,
     userId: req.user._id,
@@ -95,7 +94,7 @@ const deleteTransaction = asyncMiddleware(async (req, res) => {
       .send("The transaction with the given ID was not found.");
 
   res.send(transaction);
-});
+}
 
 module.exports = {
   getAllTransactions,

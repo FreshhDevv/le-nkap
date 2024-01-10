@@ -1,10 +1,8 @@
 const _ = require("lodash");
 const { User, validate } = require("../models/user");
-const express = require("express");
 const bcrypt = require("bcrypt");
-const asyncMiddleware = require("../middleware/async");
 
-const registerUser = asyncMiddleware(async (req, res) => {
+const registerUser = async (req, res) => {
   const { error } = validate(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
@@ -34,11 +32,11 @@ const registerUser = asyncMiddleware(async (req, res) => {
   res
     .header("x-auth-token", token)
     .send(_.pick(user, ["_id", "name", "email", "phone"]));
-});
+}
 
-const loggedInUser = asyncMiddleware(async (req, res) => {
+const loggedInUser = async (req, res) => {
   const user = await User.findById(req.user._id);
   res.send(user);
-});
+}
 
 module.exports = { registerUser, loggedInUser };

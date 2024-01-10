@@ -1,7 +1,6 @@
-const asyncMiddleware = require("../middleware/async");
 const { Category, validate } = require("../models/category");
 
-const getCategories = asyncMiddleware(async (req, res, next) => {
+const getCategories = async (req, res, next) => {
   const userId = req.user._id;
   try {
     const categories = await Category.find({ userId: userId }).sort("name");
@@ -9,9 +8,9 @@ const getCategories = asyncMiddleware(async (req, res, next) => {
   } catch (ex) {
     next(ex);
   }
-});
+}
 
-const addCategory = asyncMiddleware(async (req, res) => {
+const addCategory = async (req, res) => {
   const { error } = validate(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
@@ -34,7 +33,7 @@ const addCategory = asyncMiddleware(async (req, res) => {
   });
   await category.save();
   res.send(category);
-});
+}
 
 module.exports = {
   getCategories,

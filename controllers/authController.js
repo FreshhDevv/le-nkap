@@ -2,9 +2,8 @@ const _ = require("lodash");
 const { User } = require("../models/user");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
-const asyncMiddleware = require("../middleware/async");
 
-const login = asyncMiddleware(async (req, res) => {
+const login = async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -16,7 +15,7 @@ const login = asyncMiddleware(async (req, res) => {
 
   const token = user.generateAuthToken();
   res.send(token);
-});
+}
 
 // Validate the email and password gotten from the user.
 function validate(req) {
