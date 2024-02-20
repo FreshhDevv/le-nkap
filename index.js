@@ -21,6 +21,8 @@ if (!config.get("jwtPrivateKey")) {
 
 app.use(cors())
 
+app.use(cors())
+
 app.use(express.json());
 
 
