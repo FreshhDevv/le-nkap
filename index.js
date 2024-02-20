@@ -5,6 +5,7 @@ Joi.objectId = require("joi-objectid")(Joi);
 require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const users = require("./routes/users");
 const categories = require("./routes/categories");
@@ -33,6 +34,8 @@ async function connectToMongoDB() {
 }
 
 connectToMongoDB();
+
+app.use(cors())
 
 app.use(express.json());
 
