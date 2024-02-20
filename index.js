@@ -25,7 +25,7 @@ if (!config.get("jwtPrivateKey")) {
 
 async function connectToMongoDB() {
   try {
-    await mongoose.connect(process.env.MONGODB);
+    await mongoose.connect(process.env.MONGODB_CONNECT_URI);
     console.log("Connected to MongoDB...");
   } catch (err) {
     console.error("Could not connect to MongoDB...", err);
